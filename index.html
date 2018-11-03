@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Foto Finder</title>
+    <link rel="stylesheet" type="text/css" href="./styles/reset.css">
+    <link rel="stylesheet" type="text/css" href="./styles/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  </head>
+  <body>
+    <header>
+      <article class="title-logo-art">
+        <h1>FOTO</h1>
+        <img class="logo-pic" src="./assets/foto-finder-logo.svg">
+        <h1>FINDER</h1>
+      </article>
+      <article class="searchbar-art">
+        <input class="searchbar js-searchbar-input" type="text" name="searchbar">
+        <button class="search-btn"><i class="fas fa-search"></i></button>
+      </article>
+    </header>
+    <main>
+      <section class="input-sect">
+        <form>
+          <h2>Title</h2>
+          <input type="text" name="title" class="title-input js-title-input">
+          <h2>Caption</h2>
+          <input type="text" name="caption" class="caption-input js-caption-input">
+          <input type="file" id="file" class="inputfile" />
+          <label class="input-as-btn" for="file">Choose a file</label>
+          <button class="js-view-favs-btn">View X Favorites</button>
+          <button class="js-add-to-album-btn">Add to Album</button>
+        </form>
+      </section>
+      <section class="gallery-sect">
+        <article class="photo-card js-photo-card">
+          <h3>Title</h3>
+          <img>
+          <h3>Caption</h3>
+          <img src="./assets/delete.svg">
+          <img src="./assets/favorite.svg">
+        </article>
+      </section>
+    </main>
+  </body>
+  <script src="./script/photo.js" type="text/javascript"></script>
+  <script src="./script/main.js" type="text/javascript"></script>
+</html>
