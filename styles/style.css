@@ -22,6 +22,7 @@ header {
 
 }
 
+
 .title-logo-art { 
  display: flex;
  }
@@ -51,6 +52,7 @@ header {
   border-radius: 0px 5px 5px 0px;
   border: solid 2px #d2cccd;
   height: 36px;
+  margin-top: 0px;
 }
 
 h1 {
@@ -63,9 +65,8 @@ h1 {
 }
 
 img {
-  height: 40px;
+  height: 35px;
 }
-
 /*begin main styles (form section)*/
 
 main {
@@ -80,6 +81,7 @@ main {
 
 input {
   height: 40px;
+  margin-bottom: 20px;
 }
 
 .inputfile {
@@ -96,7 +98,7 @@ input {
   width: 100%;
   text-align: center;
   background-color: #5B4447;
-  padding: 2.5%;
+  padding: 2%;
   margin: 20px 0px;
 }
 
@@ -118,6 +120,8 @@ button {
   height: 40px;
   width: 40%;
   border: none;
+  margin-top: 20px;
+  font-size: 16px;
 }
 
 button:hover {
@@ -127,16 +131,35 @@ button:hover {
 /*begin main styles (gallery section)*/
 
 .gallery-sect {
-  display: gird;
+  padding: 20px 50px;
+  display: grid;
   grid-template-rows: repeat(1, 1fr);
   grid-template-columns: 4;
 }
 
 .photo-card {
-  height: 300px;
-  width: 185px;
+  padding: 10px; 
+  display: grid;
+  height: 380px;
+  width: 280px;
   background-color: #FFF;
   color: #3E2A35;
+  grid-template-rows: 50px 1fr 1fr 50px;
+}
+
+.icon-div {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.fit-img {
+  height: 100%;
+  width: 100%;
+}
+
+.image-home {
+
 }
 
 /*begin media queries*/
