@@ -133,13 +133,13 @@ button:hover {
 .gallery-sect {
   padding: 20px 50px;
   display: grid;
-  grid-template-rows: repeat(1, 1fr);
-  grid-template-columns: 4;
+  grid-gap: 20px;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .photo-card {
-  padding: 10px; 
-  display: grid;
+  display: grid; 
   height: 380px;
   width: 280px;
   background-color: #FFF;
@@ -148,6 +148,7 @@ button:hover {
 }
 
 .icon-div {
+  background-color: #5B4447;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -157,6 +158,14 @@ button:hover {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+h3 {
+  padding: 5px; 
+}
+
+.icons {
+  padding: 2%;
 }
 
 .image-home {

@@ -1,8 +1,9 @@
 class Photo {
-  constructor(title, caption, id) {
+  constructor(title, caption, file, id) {
     this.title = title;
-    this.caption = body;
+    this.caption = caption;
     this.id = id || Date.now();
+    this.file = file;
     
   }
 
@@ -18,9 +19,9 @@ class Photo {
   }
   
   saveToStorage(array) {
-    // localStorage.clear();
-    // var stringArray = JSON.stringify(array);
-    // localStorage.setItem('ideasKey', stringArray);
+    localStorage.clear();
+    var stringArray = JSON.stringify(array);
+    localStorage.setItem('ideasKey', stringArray);
   }
 
   updateSelf(title, caption) {
