@@ -15,7 +15,7 @@
         <h1>FINDER</h1>
       </article>
       <article class="searchbar-art">
-        <input class="searchbar js-searchbar-input" type="text" name="searchbar">
+        <input maxlength="22" class="searchbar js-searchbar-input" type="text" name="searchbar">
         <button class="search-btn"><i class="fas fa-search"></i></button>
       </article>
     </header>
@@ -23,10 +23,10 @@
       <section class="input-sect">
         <form>
           <h2>Title</h2>
-          <input type="text" name="title" class="title-input js-title-input">
+          <input maxlength="22" type="text" name="title" class="title-input js-title-input">
           <h2>Caption</h2>
-          <input type="text" name="caption" class="caption-input js-caption-input">
-          <input accept=".png, .jpg, .jpeg" type="file" id="file" class="inputfile" />
+          <input maxlength="66" type="text" name="caption" class="caption-input js-caption-input">
+          <input accept=".png, .jpg, .jpeg" type="file" id="file" class="inputfile js-input-file" />
           <label class="input-as-btn" for="file">Choose a file</label>
           <article class="button-art">
             <button class="js-view-favs-btn">View X Favorites</button>
@@ -35,7 +35,7 @@
         </form>
       </section>
       <section class="js-gallery-sect gallery-sect">
-        <article class="photo-card js-photo-card">
+        <!-- <article class="photo-card js-photo-card">
           <h3>Title</h3>
           <section class="image-home">
             <img class="fit-img" src="gent4.jpg">
@@ -45,10 +45,10 @@
             <img src="./assets/delete.svg">
             <img src="./assets/favorite.svg">
           </section>
-        </article>
+        </article> -->
       </section>
     </main>
   </body>
-  <script src="./script/photo.js" type="text/javascript"></script>
-  <script src="./script/main.js" type="text/javascript"></script>
+  <script src="./scripts/photo.js" type="text/javascript"></script>
+  <script src="./scripts/main.js" type="text/javascript"></script>
 </html>
