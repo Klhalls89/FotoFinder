@@ -1,9 +1,11 @@
 class Photo {
-  constructor(title, caption, file, id) {
+  constructor(title, caption, file, id, favorite) {
     this.title = title;
     this.caption = caption;
     this.id = id || Date.now();
     this.file = file;
+    this.favorite = false;
+    this.favoriteCounter = 0;
     
   }
 
@@ -25,8 +27,8 @@ class Photo {
   }
 
   updateSelf(title, caption) {
-    // this.title = title;
-    // this.caption = caption;
+    this.title = title;
+    this.caption = caption;
   }
 
 }

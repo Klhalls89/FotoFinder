@@ -14,12 +14,12 @@ if(value === 'title'){
 }
 }
 
-
-
 function createNewPhoto(event) { 
   event.preventDefault();
   var photo = new Photo(getInput('title').value, getInput('caption').value, getInput('file'));
   cardPrepend(photo);
+  photoArray.push(photo);
+  photo.saveToStorage(photoArray)
   clearInputs();
 }
 
@@ -46,31 +46,3 @@ function cardPrepend(photoObj) {
     );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function getInput(value){
-
-// }
-
-// function saveToStorage(){
-// }
