@@ -168,8 +168,14 @@ h3 {
   padding: 2%;
 }
 
+
 .image-home {
 
+}
+
+/*hidden class doesn't appear in html*/
+.hidden {
+  display: none;
 }
 
 /*begin media queries*/
