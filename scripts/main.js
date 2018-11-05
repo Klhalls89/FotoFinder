@@ -3,9 +3,39 @@ var reader = new FileReader();
 
 document.querySelector('.js-add-to-album-btn').addEventListener('click', createNewPhoto);
 document.querySelector('.js-gallery-sect').addEventListener('click', functionCaller);
+document.querySelector('.js-gallery-sect').addEventListener('focusout', cardUpdate);
 document.querySelector('.js-input-file').addEventListener('change',getSrc);
 
+getInput('search').addEventListener('keyup', cardSearch);
+
 setInitState()
+
+function cardUpdate() {
+  if (event.target.classList.contains('js-title-input')) {
+    titleUpdate();
+  }
+
+  if (event.target.classList.contains('js-caption-input')) {
+    bodyUpdate();
+  }
+}
+
+function cardSearch() {
+  var allCards = document.querySelectorAll('.js-photo-card');
+
+  allCards.forEach(function(card) {
+    var title = card.children[0].innerText.toLowerCase();
+    var caption = card.children[2].innerText.toLowerCase();
+    console.log(title, caption)
+    var searchInput = getInput('search').value.toLowerCase();
+
+    if (!title.includes(searchInput) && !caption.includes(searchInput)) {
+      card.classList.add('hidden');
+    } else {
+      card.classList.remove('hidden');
+    }
+  });
+}
 
 
 function getSrc(){
@@ -41,7 +71,6 @@ function clearInputs() {
 
 
 function cardPrepend(photoObj) {
-  console.log(photoObj);
   document.querySelector('.js-gallery-sect').insertAdjacentHTML('afterbegin',
     `<article data-key="${photoObj.id}" class="photo-card js-photo-card">
           <h3 contentEditable="true" class="js-card-title">${photoObj.title}<h3>
@@ -79,9 +108,9 @@ function setInitState() {
 }
 
 function functionCaller() {
-  //  if (event.target.classList.contains('js-fav')) {
-  //   favPic();
-  // }
+   if (event.target.classList.contains('js-fav')) {
+    favPic();
+  }
 
   if (event.target.classList.contains('js-delete')) {
     deleteCard();
