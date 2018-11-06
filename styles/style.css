@@ -22,13 +22,8 @@ header {
 
 }
 
-.title-logo-art { 
- display: flex;
- }
-
 h1 {
   font-size: 40px;
-  font-weight: 800; 
 }
 
 .logo-pic {
@@ -106,7 +101,7 @@ button {
 }
 
 .input-as-btn {
-  padding: 2%;
+  padding: 1.5%;
   text-align: center;
   width: 100%;
 }
@@ -221,17 +216,36 @@ img {
 @media only screen and (max-width: 750px) {
   body {
     grid-template-rows: 150px 1fr;
+    background-color: #C2B2B4;
   }
 
   header {
+    display: flex;
+    justify-content: center;
     display: grid;
     flex-direction: column;
+    grid-gap: 20px;
     grid-template-rows: 75px 75px;
-    width: 100%;
+  }
+
+  h1 {
+    font-size: 4.35rem;
+  }
+
+.logo-pic {
+  height: 50px;
+  }
+
+.search-btn {
+  width: 20%;
   }
 
   main {
     grid-template-rows: 355px 1fr;
+  }
+
+  .gallery-sect {
+    margin: auto;
   }
 
   .searchbar-art,
@@ -251,3 +265,64 @@ img {
     
   }
 } 
+
+@media only screen and (max-width: 555px) {
+  h1 {
+    font-size: 4rem;
+  }
+} 
+
+@media only screen and (max-width: 520px) {
+  h1 {
+    font-size: 3.5rem;
+  }
+}
+@media only screen and (max-width: 470px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+
+@media only screen and (max-width: 370px) {
+   h1 {
+    font-size: 2.25rem;
+  }
+  form {
+    width: 85%
+  }
+}
+
+@media only screen and (max-width: 350px) {
+   h1 {
+    font-size: 2rem;
+  }
+  form {
+    width: 80%
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  body {
+    background-color: #3E2A35;
+  }
+  header {
+    padding: 10px 0 0 0;
+  }
+
+  .gallery-sect {
+    padding: 20px;
+}
+
+  h1 {
+    font-size: 1.75rem;
+    padding-top: 30px;
+  }
+  form {
+    width: 80%
+  }
+
+  .logo-pic {
+  height: 30px;
+  }
+}
