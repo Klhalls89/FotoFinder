@@ -74,7 +74,7 @@ function cardPrepend(photoObj) {
   document.querySelector('.js-gallery-sect').insertAdjacentHTML('afterbegin',
     `<article data-key="${photoObj.id}" class="photo-card js-photo-card">
           <h3 contentEditable="true" class="js-card-title">${photoObj.title}<h3>
-          <section class="image-home">
+          <section name="image-home">
             <img class="fit-img" src="${photoObj.file}">
           </section>
           <h3 contentEditable="true">${photoObj.caption}</h3>
