@@ -10,14 +10,34 @@ getInput('search').addEventListener('keyup', cardSearch);
 
 setInitState()
 
-function cardUpdate() {
-  if (event.target.classList.contains('js-title-input')) {
-    titleUpdate();
-  }
+function clearInputs() {
+  getInput('title').value = '';
+  getInput('caption').value = '';
+}
 
-  if (event.target.classList.contains('js-caption-input')) {
-    bodyUpdate();
-  }
+function createNewPhoto(event) { 
+  event.preventDefault();
+  var photo = new Photo(getInput('title').value, getInput('caption').value, getInput('file'));
+  cardPrepend(photo);
+  photoArray.push(photo);
+  photo.saveToStorage(photoArray)
+  clearInputs();
+}
+
+function cardPrepend(photoObj) {
+  document.querySelector('.js-gallery-sect').insertAdjacentHTML('afterbegin',
+    `<article data-key="${photoObj.id}" class="photo-card js-photo-card">
+          <h3 contentEditable="true" class="js-card-title">${photoObj.title}<h3>
+          <section name="image-home">
+            <img class="fit-img" src="${photoObj.file}">
+          </section>
+          <h3 contentEditable="true">${photoObj.caption}</h3>
+          <section class="icon-div">
+            <img class="js-delete icons" src="./assets/delete.svg">
+            <img class="js-fav icons" src="./assets/favorite.svg">
+          </section>
+        </article>`
+    );
 }
 
 function cardSearch() {
@@ -37,9 +57,36 @@ function cardSearch() {
   });
 }
 
+function cardUpdate() {
+  if (event.target.classList.contains('js-title-input')) {
+    titleUpdate();
+  }
 
-function getSrc(){
-  reader.readAsDataURL(document.querySelector('.js-input-file').files[0]);
+  if (event.target.classList.contains('js-caption-input')) {
+    bodyUpdate();
+  }
+}
+
+function deleteCard() {
+  var cardKey = parseInt(event.target.closest('.js-photo-card').dataset.key);
+
+  photoArray.forEach(function(photoInst) {
+    if (photoInst.id === cardKey) {
+      photoInst.deleteFromStorage(cardKey);
+    }
+  });
+
+  event.target.closest('.js-photo-card').remove();
+}
+
+function functionCaller() {
+   if (event.target.classList.contains('js-fav')) {
+    favPic();
+  }
+
+  if (event.target.classList.contains('js-delete')) {
+    deleteCard();
+  }
 }
 
 function getInput(value) {
@@ -55,69 +102,19 @@ if(value === 'title'){
 }
 }
 
-function createNewPhoto(event) { 
-  event.preventDefault();
-  var photo = new Photo(getInput('title').value, getInput('caption').value, getInput('file'));
-  cardPrepend(photo);
-  photoArray.push(photo);
-  photo.saveToStorage(photoArray)
-  clearInputs();
+function getSrc(){
+  reader.readAsDataURL(document.querySelector('.js-input-file').files[0]);
 }
-
-function clearInputs() {
-  getInput('title').value = '';
-  getInput('caption').value = '';
-}
-
-
-function cardPrepend(photoObj) {
-  document.querySelector('.js-gallery-sect').insertAdjacentHTML('afterbegin',
-    `<article data-key="${photoObj.id}" class="photo-card js-photo-card">
-          <h3 contentEditable="true" class="js-card-title">${photoObj.title}<h3>
-          <section name="image-home">
-            <img class="fit-img" src="${photoObj.file}">
-          </section>
-          <h3 contentEditable="true">${photoObj.caption}</h3>
-          <section class="icon-div">
-            <img class="js-delete icons" src="./assets/delete.svg">
-            <img class="js-fav icons" src="./assets/favorite.svg">
-          </section>
-        </article>`
-    );
-}
-
-function deleteCard() {
-  var cardKey = parseInt(event.target.closest('.js-photo-card').dataset.key);
-
-  photoArray.forEach(function(photoInst) {
-    if (photoInst.id === cardKey) {
-      photoInst.deleteFromStorage(cardKey);
-    }
-  });
-
-  event.target.closest('.js-photo-card').remove();
-}
-
 
 function setInitState() {
   if (localStorage.length === 0) {
     return
   } else {
-    reinstanceParseCardArray();
+    reinstateStorage();
   }
 }
 
-function functionCaller() {
-   if (event.target.classList.contains('js-fav')) {
-    favPic();
-  }
-
-  if (event.target.classList.contains('js-delete')) {
-    deleteCard();
-  }
-}
-
-function reinstanceParseCardArray() {
+function reinstateStorage() {
   var photoArrayString;
   photoArrayString = localStorage.getItem('photosKey');
   photoArray.length = 0;
