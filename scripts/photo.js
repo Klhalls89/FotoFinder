@@ -5,7 +5,6 @@ class Photo {
     this.id = id || Date.now();
     this.file = file;
     this.favorite = favorite || false;
-    this.favoriteCounter = 0;
     
   }
 

@@ -93,8 +93,9 @@ function deleteCard() {
 }
 
 function favPic() {
-   var cardKey = parseInt(event.target.closest('.js-photo-card').dataset.key);
-  
+  var cardKey = parseInt(event.target.closest('.js-photo-card').dataset.key);
+  var favArray;
+
   if(event.target.src.includes('favorite.svg') ){
     event.target.src = "./assets/favorite-active.svg";
   } else {
@@ -104,13 +105,22 @@ function favPic() {
 
   photoArray.forEach(function(photoInst) {
     if (photoInst.id === cardKey) {
-      photoInst.updatePhoto(photoInst.title, photoInst.caption, !photoInst.favorite);
+      photoInst.favorite = !photoInst.favorite;
+      photoInst.updatePhoto(photoInst.title, photoInst.caption, photoInst.favorite);
     photoInst.saveToStorage(photoArray)
     }
   });
 
+  favBtnUpdate()
+  //use favArray.length to update the inner html of the js-view-favs-btn 
+}
 
-  //presist after reload
+function favBtnUpdate(){
+    favArray = photoArray.filter(function(photoInst){
+    return photoInst.favorite === true;
+  })
+  
+  document.querySelector('.js-view-favs-btn').innerText = `View ${favArray.length} favorites`
 }
 
 function functionCaller() {
@@ -149,7 +159,7 @@ function reinstateStorage() {
 
   jsonPhotoArray.forEach(function(photoInst) {
     cardPrepend(photoInst);
-    var photo = new Photo(photoInst.title, photoInst.caption, photoInst.file, photoInst.id);
+    var photo = new Photo(photoInst.title, photoInst.caption, photoInst.file, photoInst.id, photoInst.favorite);
     photoArray.push(photo);
   });
 }
@@ -159,6 +169,7 @@ function setInitState() {
     return
   } else {
     reinstateStorage();
+    favBtnUpdate();
   }
 }
 
