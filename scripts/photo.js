@@ -5,12 +5,11 @@ class Photo {
     this.id = id || Date.now();
     this.file = file;
     this.favorite = favorite || false;
-    
   }
 
   deleteFromStorage(key) {
     var newPhotoArray = photoArray.filter(function (photoInst) {
-      if (photoInst.id !== key){
+      if (photoInst.id !== key) {
         return photoInst;
       }
     });
@@ -30,5 +29,4 @@ class Photo {
     this.caption = caption;
     this.favorite = favorite;
   }
-
 }
