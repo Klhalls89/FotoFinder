@@ -4,7 +4,7 @@ class Photo {
     this.caption = caption;
     this.id = id || Date.now();
     this.file = file;
-    this.favorite = false;
+    this.favorite = favorite || false;
     this.favoriteCounter = 0;
     
   }
@@ -26,9 +26,10 @@ class Photo {
     localStorage.setItem('photosKey', stringArray);
   }
 
-  updateSelf(title, caption) {
+  updatePhoto(title, caption, favorite) {
     this.title = title;
     this.caption = caption;
+    this.favorite = favorite;
   }
 
 }

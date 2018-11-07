@@ -27,17 +27,20 @@ function createNewPhoto(event) {
 function cardPrepend(photoObj) {
   document.querySelector('.js-gallery-sect').insertAdjacentHTML('afterbegin',
     `<article data-key="${photoObj.id}" class="photo-card js-photo-card">
-          <h3 contentEditable="true" class="js-card-title">${photoObj.title}<h3>
+          <h3 contentEditable="true" class="js-card-title">${photoObj.title}</h3>
           <section name="image-home">
             <img class="fit-img" src="${photoObj.file}">
           </section>
-          <h3 contentEditable="true">${photoObj.caption}</h3>
+          <h3 class="js-card-caption" contentEditable="true">${photoObj.caption}</h3>
           <section class="icon-div">
             <img class="js-delete icons" src="./assets/delete.svg">
-            <img class="js-fav icons" src="./assets/favorite.svg">
+            <img id="${photoObj.id}" class="js-fav icons" src="./assets/favorite.svg">
           </section>
         </article>`
     );
+  if(photoObj.favorite === true){
+    document.getElementById(photoObj.id).src = "./assets/favorite-active.svg";
+  }
 }
 
 function cardSearch() {
@@ -58,13 +61,23 @@ function cardSearch() {
 }
 
 function cardUpdate() {
-  if (event.target.classList.contains('js-title-input')) {
+  if (event.target.classList.contains('js-card-title')) {
     titleUpdate();
   }
 
-  if (event.target.classList.contains('js-caption-input')) {
-    bodyUpdate();
+  if (event.target.classList.contains('js-card-caption')) {
+    captionUpdate();
   }
+}
+
+function captionUpdate() {
+  var cardKey = parseInt(event.target.closest('.js-photo-card').dataset.key);
+  photoArray.forEach(function(photoInst) {
+    if (photoInst.id === cardKey) {
+      photoInst.updatePhoto(event.target.previousElementSibling.previousElementSibling.innerText, event.target.innerText); 
+      photoInst.saveToStorage(photoArray);
+    }
+  });
 }
 
 function deleteCard() {
@@ -77,6 +90,27 @@ function deleteCard() {
   });
 
   event.target.closest('.js-photo-card').remove();
+}
+
+function favPic() {
+   var cardKey = parseInt(event.target.closest('.js-photo-card').dataset.key);
+  
+  if(event.target.src.includes('favorite.svg') ){
+    event.target.src = "./assets/favorite-active.svg";
+  } else {
+    event.target.src = "./assets/favorite.svg";
+  }
+ 
+
+  photoArray.forEach(function(photoInst) {
+    if (photoInst.id === cardKey) {
+      photoInst.updatePhoto(photoInst.title, photoInst.caption, !photoInst.favorite);
+    photoInst.saveToStorage(photoArray)
+    }
+  });
+
+
+  //presist after reload
 }
 
 function functionCaller() {
@@ -106,13 +140,6 @@ function getSrc(){
   reader.readAsDataURL(document.querySelector('.js-input-file').files[0]);
 }
 
-function setInitState() {
-  if (localStorage.length === 0) {
-    return
-  } else {
-    reinstateStorage();
-  }
-}
 
 function reinstateStorage() {
   var photoArrayString;
@@ -124,5 +151,24 @@ function reinstateStorage() {
     cardPrepend(photoInst);
     var photo = new Photo(photoInst.title, photoInst.caption, photoInst.file, photoInst.id);
     photoArray.push(photo);
+  });
+}
+
+function setInitState() {
+  if (localStorage.length === 0) {
+    return
+  } else {
+    reinstateStorage();
+  }
+}
+
+function titleUpdate() {
+  var cardKey = parseInt(event.target.closest('.js-photo-card').dataset.key);
+    
+  photoArray.forEach(function(photoInst) {
+    if (photoInst.id === cardKey) {
+      photoInst.updatePhoto(event.target.innerText, event.target.nextElementSibling.nextElementSibling.innerText);
+      photoInst.saveToStorage(photoArray);
+    }
   });
 }
